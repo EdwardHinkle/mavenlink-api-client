@@ -15,10 +15,19 @@ export class MavenlinkApiEndpoint {
         let stringOptions = '';
 
         for (let key in this.apiOptions) {
-            if (key === 'updated_after') {
-                stringOptions += `${key}=${this.apiOptions[key].toISOString()}&`
-            } else {
-                stringOptions += `${key}=${this.apiOptions[key]}&`
+            switch(key) {
+                case 'per_page':
+                    stringOptions += `${key}=${this.apiOptions.per_page}&`;
+                    break;
+                case 'page':
+                    stringOptions += `${key}=${this.apiOptions.page}&`;
+                    break;
+                case 'all_on_account':
+                    stringOptions += `${key}=${this.apiOptions.all_on_account}&`;
+                    break;
+                case 'updated_after':
+                    stringOptions += `${key}=${this.apiOptions.updated_after.toISOString()}&`;
+                    break;
             }
         }
 

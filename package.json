@@ -1,0 +1,30 @@
+{
+  "name": "mavenlink-api-client",
+  "version": "0.1.0",
+  "description": "A TypeScript node.js client that interfaces with the Mavenlink API",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^2.0.0"
+  },
+  "author": "Eddie Hinkle <hello@eddiehinkle.com> (https://eddiehinkle.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EdwardHinkle/mavenlink-api-client"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@types/lodash": "^4.14.58",
+    "@types/moment": "^2.13.0",
+    "@types/node": "^7.0.10",
+    "@types/request": "0.0.42",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "request": "^2.81.0",
+    "tslint": "^5.1.0"
+  }
+}
