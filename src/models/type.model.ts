@@ -1,0 +1,1 @@
+export type MavenlinkType = 'story' | 'user' | 'workspace';

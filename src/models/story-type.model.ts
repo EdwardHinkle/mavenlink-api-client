@@ -1,0 +1,1 @@
+export type MavenlinkStoryType = 'task' | 'issue' | 'milestone' | 'deliverable';

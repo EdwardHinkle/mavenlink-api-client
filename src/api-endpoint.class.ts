@@ -1,5 +1,8 @@
 import * as moment from 'moment';
 
+import { MavenlinkStoryType } from './models/story-type.model';
+import { MavenlinkType } from './models/type.model';
+
 export class MavenlinkApiEndpoint {
     apiRoot: string;
     apiEndpoint: string;
@@ -11,7 +14,7 @@ export class MavenlinkApiEndpoint {
         this.apiOptions = options.apiOptions;
     }
 
-    stringifyApiOptions(): string {
+    stringifyApiOptions(ignore: string = ''): string {
         let stringOptions = '';
 
         for (let key in this.apiOptions) {
@@ -27,6 +30,18 @@ export class MavenlinkApiEndpoint {
                     break;
                 case 'updated_after':
                     stringOptions += `${key}=${this.apiOptions.updated_after.toISOString()}&`;
+                    break;
+                case 'updated_before':
+                    stringOptions += `${key}=${this.apiOptions.updated_before.toISOString()}&`;
+                    break;
+                case 'story_type':
+                    stringOptions += `${key}=${this.apiOptions.story_type.join(",")}&`;
+                    break;
+                case 'story_id':
+                    stringOptions += `${key}=${this.apiOptions.story_id}&`;
+                    break;
+                case 'include':
+                    stringOptions += `${key}=${this.apiOptions.include.join(",")}&`;
                     break;
             }
         }
@@ -50,4 +65,9 @@ export interface MavenlinkApiOptions {
     page?: number;
     all_on_account?: boolean;
     updated_after?: moment.Moment;
+    updated_before?: moment.Moment;
+    story_type?: MavenlinkStoryType[],
+    story_id?: string;
+    include?: MavenlinkType[];
 }
+
