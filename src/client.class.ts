@@ -131,6 +131,39 @@ export class MavenlinkClient {
         clearInterval(this.checkTaskTimer);
     }
 
+    getAuthUrl() {
+        return `https://app.mavenlink.com/oauth/authorize?response_type=code&client_id=${this.appId}&redirect_uri=${encodeURIComponent(this.callbackUrl)}`
+    }
+
+    authCallback(authCode): Promise<any> {
+
+        return new Promise((resolve, reject) => {
+            console.log("OAuth 2 Now");
+            console.log(authCode);
+
+            request.post({
+                'uri': `https://app.mavenlink.com/oauth/token`,
+                'json': true,
+                'body': {
+                    client_id: this.appId,
+                    client_secret: this.secretToken,
+                    grant_type: 'authorization_code',
+                    code: authCode,
+                    redirect_uri: this.callbackUrl
+                }
+            }, (error, response, body) => {
+
+                if (error != undefined) {
+                    console.log("Error Found");
+                    reject(error);
+                }
+
+                console.log(body);
+                resolve(body);
+            });
+        });
+    }
+
 }
 
 export interface MavenlinkClientOptions {
