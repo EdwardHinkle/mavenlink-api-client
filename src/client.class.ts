@@ -131,15 +131,17 @@ export class MavenlinkClient {
         clearInterval(this.checkTaskTimer);
     }
 
-    getAuthUrl() {
-        return `https://app.mavenlink.com/oauth/authorize?response_type=code&client_id=${this.appId}&redirect_uri=${encodeURIComponent(this.callbackUrl)}`
+    getAuthUrl(state?: string) {
+        let authUrl = `https://app.mavenlink.com/oauth/authorize?response_type=code&client_id=${this.appId}&redirect_uri=${encodeURIComponent(this.callbackUrl)}`;
+        if (state !== undefined) {
+            authUrl += `&state=${state}`;
+        }
+        return authUrl;
     }
 
-    authCallback(authCode): Promise<any> {
+    getAccessTokenFromCode(authCode): Promise<string> {
 
-        return new Promise((resolve, reject) => {
-            console.log("OAuth 2 Now");
-            console.log(authCode);
+        return new Promise<string>((resolve, reject) => {
 
             request.post({
                 'uri': `https://app.mavenlink.com/oauth/token`,
@@ -154,12 +156,16 @@ export class MavenlinkClient {
             }, (error, response, body) => {
 
                 if (error != undefined) {
-                    console.log("Error Found");
                     reject(error);
+                    return;
                 }
 
-                console.log(body);
-                resolve(body);
+                if (body.access_token === undefined) {
+                    reject("Missing access token in response");
+                    return;
+                }
+
+                resolve(body.access_token);
             });
         });
     }
