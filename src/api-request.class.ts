@@ -7,11 +7,11 @@ import { MavenlinkObjects } from './models/objects.model';
 
 export class MavenlinkApiRequest {
 
-    adminAuthToken: string;
+    authToken: string;
     apiEndpoint: MavenlinkApiEndpoint;
 
     constructor(options: MavenlinkRequestOptions) {
-        this.adminAuthToken = options.adminAuthToken;
+        this.authToken = options.authToken;
         this.apiEndpoint = options.apiEndpoint;
     }
 
@@ -21,7 +21,7 @@ export class MavenlinkApiRequest {
             request.get({
                 'uri': this.apiEndpoint.toString(),
                 'auth': {
-                    'bearer': this.adminAuthToken
+                    'bearer': this.authToken
                 },
                 'json': true
             }, (error, response, body) => {
@@ -76,7 +76,7 @@ export class MavenlinkApiRequest {
 }
 
 export interface MavenlinkRequestOptions {
-    adminAuthToken: string;
+    authToken: string;
     apiEndpoint: MavenlinkApiEndpoint
 }
 
