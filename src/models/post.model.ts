@@ -1,6 +1,4 @@
-import {MavenlinkObject} from './object.interface';
-
-export interface MavenlinkPost extends MavenlinkObject {
+export interface MavenlinkPost {
     message: string;
     workspace_id: string;
     subject_id?: string;

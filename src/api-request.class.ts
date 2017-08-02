@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 
 import { MavenlinkApiEndpoint } from "./api-endpoint.class";
 import { MavenlinkObjects } from './models/objects.model';
-import {MavenlinkAliasType, MavenlinkNativeType, MavenlinkType} from './models/type.model';
+import {MavenlinkAliasType, MavenlinkAPIType, MavenlinkNativeType, MavenlinkType} from './models/type.model';
 
 export class MavenlinkApiRequest {
 
@@ -95,6 +95,31 @@ export class MavenlinkApiRequest {
                     resolve(combinedTasks);
 
                 }
+            });
+
+        });
+    }
+
+    createItem(createObject: MavenlinkAPIType): Promise<MavenlinkAPIType> {
+        return new Promise((resolve, reject) => {
+
+            request.get({
+                'uri': this.apiEndpoint.toString(),
+                'auth': {
+                    'bearer': this.authToken
+                },
+                'json': true,
+                'body': createObject
+            }, (error, response, body) => {
+
+                if (error != undefined) {
+                    console.log("Error Found");
+                    reject(error);
+                }
+
+                console.log(`${this.apiEndpoint}`);
+                console.log(body);
+                resolve(body);
             });
 
         });

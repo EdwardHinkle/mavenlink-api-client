@@ -1,5 +1,5 @@
 export interface MavenlinkUser {
-    id: number;
+    id: string;
     account_id: string;
     full_name: string;
     photo_path: string;
