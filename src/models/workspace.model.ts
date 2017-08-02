@@ -1,3 +1,5 @@
+import {MavenlinkUser} from './user.model';
+
 export interface MavenlinkWorkspace {
     access_level: 'invitation' | 'open' | 'admin';
     archived: boolean;
@@ -28,4 +30,5 @@ export interface MavenlinkWorkspace {
     start_date: string;
     title: string;
     updated_at: string;
+    participants? : MavenlinkUser[];
 }
