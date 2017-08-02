@@ -4,7 +4,10 @@ import * as _ from 'lodash';
 
 import { MavenlinkApiEndpoint } from "./api-endpoint.class";
 import { MavenlinkObjects } from './models/objects.model';
-import {MavenlinkAliasType, MavenlinkAPIType, MavenlinkNativeType, MavenlinkType} from './models/type.model';
+import {
+    MavenlinkAliasType, MavenlinkAPICreateType, MavenlinkAPIType, MavenlinkNativeType,
+    MavenlinkType
+} from './models/type.model';
 
 export class MavenlinkApiRequest {
 
@@ -100,7 +103,7 @@ export class MavenlinkApiRequest {
         });
     }
 
-    createItem(createObject: MavenlinkAPIType): Promise<MavenlinkAPIType> {
+    createItem(createObject: MavenlinkAPICreateType): Promise<MavenlinkAPIType> {
         return new Promise((resolve, reject) => {
 
             request.post({
@@ -115,6 +118,10 @@ export class MavenlinkApiRequest {
                 if (error != undefined) {
                     console.log("Error Found");
                     reject(error);
+                }
+
+                if (body.errors !== undefined) {
+                    reject(body.errors);
                 }
 
                 console.log(`${this.apiEndpoint}`);

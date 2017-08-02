@@ -7,3 +7,7 @@ export interface MavenlinkPost {
     recipient_ids?: string[];
     attachment_ids?: string[];
 }
+
+export interface MavenlinkCreatePost {
+    post: MavenlinkPost;
+}
