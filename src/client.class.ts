@@ -184,8 +184,3 @@ export interface MavenlinkWatcherOptions {
     frequency?: number; // This is the frequency at which an API is watched in minutes
     story_type: MavenlinkStoryType;
 }
-
-export interface MavenlinkResult {
-    key: string;
-    id: string;
-}

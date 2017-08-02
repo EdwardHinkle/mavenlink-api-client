@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 
 import { MavenlinkApiEndpoint } from "./api-endpoint.class";
 import { MavenlinkObjects } from './models/objects.model';
+import {MavenlinkAliasType, MavenlinkNativeType, MavenlinkType} from './models/type.model';
 
 export class MavenlinkApiRequest {
 
@@ -41,11 +42,24 @@ export class MavenlinkApiRequest {
                     if (this.apiEndpoint.apiOptions.include !== undefined) {
                         this.apiEndpoint.apiOptions.include.forEach((includeItem) => {
 
+                            let includeIdName = `${includeItem}_id`;
+
+                            // Check for special cases and fix id name for those instances
+                            if (includeItem === 'participants') {
+                                includeIdName = 'participant_ids';
+                            }
+
                             // Grab the id of each included item
-                            let includeId = builtObject[`${includeItem}_id`];
+                            let includeId = builtObject[includeIdName];
+
+                            // Check if type is an alias and if so convert it to native
+                            let nativeType: MavenlinkNativeType = MavenlinkObjects.isAliasType(includeItem) ? MavenlinkObjects.getNativeType(<MavenlinkAliasType>includeItem) : <MavenlinkNativeType>includeItem;
+
+                            // Get the plural name for the native type
+                            let pluralName = MavenlinkObjects.getPluralName(nativeType);
 
                             // Fetch included model and include it as an attribute as the primary model
-                            builtObject[includeItem] = body[MavenlinkObjects.getPluralName(includeItem)][includeId];
+                            builtObject[includeItem] = body[pluralName][includeId];
                         });
                     }
 

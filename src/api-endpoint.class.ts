@@ -1,15 +1,15 @@
 import * as moment from 'moment';
 
 import { MavenlinkStoryType } from './models/story-type.model';
-import { MavenlinkType } from './models/type.model';
+import {MavenlinkAliasType, MavenlinkType} from './models/type.model';
 
 export class MavenlinkApiEndpoint {
-    apiRoot: string;
+    apiRoot: string = 'https://api.mavenlink.com/api/v1';
     apiEndpoint: string;
     apiOptions: MavenlinkApiOptions;
 
     constructor(options: MavenlinkApiEndpointOptions) {
-        this.apiRoot = options.apiRoot;
+        this.apiRoot = options.apiRoot ? options.apiRoot : this.apiRoot;
         this.apiEndpoint = options.apiEndpoint;
         this.apiOptions = options.apiOptions;
     }
@@ -55,7 +55,7 @@ export class MavenlinkApiEndpoint {
 }
 
 export interface MavenlinkApiEndpointOptions {
-    apiRoot: string;
+    apiRoot?: string;
     apiEndpoint: string;
     apiOptions: MavenlinkApiOptions;
 }
