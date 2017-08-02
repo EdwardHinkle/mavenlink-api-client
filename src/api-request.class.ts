@@ -103,7 +103,7 @@ export class MavenlinkApiRequest {
     createItem(createObject: MavenlinkAPIType): Promise<MavenlinkAPIType> {
         return new Promise((resolve, reject) => {
 
-            request.get({
+            request.post({
                 'uri': this.apiEndpoint.toString(),
                 'auth': {
                     'bearer': this.authToken
