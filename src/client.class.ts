@@ -53,7 +53,7 @@ export class MavenlinkClient {
                 });
 
                 let apiRequest = new MavenlinkApiRequest({
-                    adminAuthToken: this.adminAuthToken,
+                    authToken: this.adminAuthToken,
                     apiEndpoint: apiEndpoint
                 });
 
@@ -65,7 +65,7 @@ export class MavenlinkClient {
                     // Grab all the story state changes for all of these stories
                     stories.forEach((story) => {
                         let stateChangeRequest = new MavenlinkApiRequest({
-                            adminAuthToken: this.adminAuthToken,
+                            authToken: this.adminAuthToken,
                             apiEndpoint: new MavenlinkApiEndpoint({
                                 apiRoot: this.apiRoot,
                                 apiEndpoint: 'story_state_changes',
