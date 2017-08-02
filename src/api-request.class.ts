@@ -58,8 +58,21 @@ export class MavenlinkApiRequest {
                             // Get the plural name for the native type
                             let pluralName = MavenlinkObjects.getPluralName(nativeType);
 
-                            // Fetch included model and include it as an attribute as the primary model
-                            builtObject[includeItem] = body[pluralName][includeId];
+                            // Check if includeId is an array or a string
+                            if (Array.isArray(includeId)) {
+
+                                builtObject[includeItem] = [];
+
+                                // Fetch included model and include it as an attribute as the primary model
+                                includeId.forEach(id => builtObject[includeItem].push(body[pluralName][id]) );
+
+                            } else {
+
+                                // Fetch included model and include it as an attribute as the primary model
+                                builtObject[includeItem] = body[pluralName][includeId];
+
+                            }
+
                         });
                     }
 
