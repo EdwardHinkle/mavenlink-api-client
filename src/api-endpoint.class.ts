@@ -14,7 +14,7 @@ export class MavenlinkApiEndpoint {
         this.apiOptions = options.apiOptions;
     }
 
-    stringifyApiOptions(ignore: string = ''): string {
+    stringifyApiOptions(): string {
         let stringOptions = '';
 
         for (let key in this.apiOptions) {
