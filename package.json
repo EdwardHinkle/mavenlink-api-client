@@ -1,7 +1,7 @@
 {
   "name": "mavenlink-api",
   "author": "Eddie Hinkle <eddie@eddiehinkle.com> (https://eddiehinkle.com)",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A TypeScript node.js client that interfaces with the Mavenlink API",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
